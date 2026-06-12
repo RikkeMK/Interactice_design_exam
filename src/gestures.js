@@ -26,10 +26,19 @@ export function getHandGesture(landmarks) {
   return {
     grip,
     indexTip,
+    pointer: {
+      x: 1 - clamp(indexTip.x, 0.03, 0.97),
+      y: clamp(indexTip.y, 0.06, 0.94),
+    },
     isOpenHand: openFingerCount >= 4,
     isPinching,
     isPointingUp,
-    name: getGestureName({ isPinching, isPointingUp, openFingerCount }),
+    name: getGestureName({
+      isPinching,
+      isPointingUp,
+      openFingerCount,
+      hovering: false,
+    }),
     rotation: clamp((middleBase.x - wrist.x) * -115, -34, 34),
   };
 }
@@ -55,7 +64,12 @@ export function movePuckWithGesture(gesture, puck) {
   puck.removeAttribute("data-searching");
 }
 
-function getGestureName({ isPinching, isPointingUp, openFingerCount }) {
+function getGestureName({
+  isPinching,
+  isPointingUp,
+  openFingerCount,
+  hovering,
+}) {
   if (openFingerCount >= 4) {
     return "Open hand";
   }
@@ -70,6 +84,10 @@ function getGestureName({ isPinching, isPointingUp, openFingerCount }) {
 
   if (isPointingUp) {
     return "Pointing up";
+  }
+
+  if (hovering) {
+    return "Hovering";
   }
 
   return "Tracking";

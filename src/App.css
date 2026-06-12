@@ -26,6 +26,46 @@
   text-transform: uppercase;
 }
 
+.testBox {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.testBoxGroup {
+  position: absolute;
+  inset: auto 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.testBoxLeft {
+  background-color: red;
+}
+
+.testBox[data-hovered="true"] {
+  opacity: 0.78;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.22),
+    var(--shadow-soft);
+  transition:
+    transform 140ms ease,
+    opacity 140ms ease,
+    box-shadow 140ms ease;
+}
+.testBoxRight {
+  background-color: blue;
+}
+.testBoxCenter {
+  background-color: green;
+}
+
 h1 {
   margin: 0;
   color: var(--text-strong);
@@ -121,8 +161,6 @@ h1 {
 }
 
 .map-scene {
-  --zoom-scale: calc(0.72 + (var(--zoom-level, 0) * 0.42));
-
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -143,7 +181,6 @@ h1 {
     linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 52px 52px;
   mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
-  transform: scale(var(--zoom-scale));
   transform-origin: center;
   opacity: 0.9;
 }
@@ -222,7 +259,7 @@ h1 {
   background:
     radial-gradient(circle, rgba(255, 255, 255, 0.28), transparent 52%),
     rgba(31, 187, 166, 0.12);
-  transform: translate(-50%, -50%) scale(var(--zoom-scale));
+  transform: translate(-50%, -50%);
   box-shadow:
     0 0 0 14px rgba(31, 187, 166, 0.08),
     0 0 60px rgba(31, 187, 166, 0.15);
@@ -256,15 +293,6 @@ h1 {
   color: #f8f4ea;
   font-size: 0.88rem;
   font-weight: 700;
-}
-
-.map-hud strong {
-  min-width: 54px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(31, 187, 166, 0.16);
-  color: #ffffff;
-  text-align: center;
 }
 
 .webcam-feed.is-hidden {

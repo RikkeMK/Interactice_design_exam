@@ -35,7 +35,7 @@ function App() {
           isLoading={isLoading}
           isRunning={isRunning}
           onStartCamera={startCamera}
-          zoom={tracking.zoom}
+          tracking={tracking}
           webcamRef={webcamRef}
         />
 

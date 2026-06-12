@@ -145,8 +145,8 @@ function createTrackingStatus(results, gesture) {
     hand: hand?.categoryName ?? "Hand",
     confidence: hand?.score ?? 0,
     gesture: gesture.name,
-    zoom: gesture.grip,
     pinching: gesture.isPinching,
+    pointer: gesture.pointer,
   };
 }
 

@@ -9,7 +9,6 @@ export function ControlPanel({
     <aside className="control-panel">
       <Metric label="Hand" value={tracking.hand} />
       <Metric label="Gesture" value={tracking.gesture} />
-      <Metric label="Zoom" value={formatPercent(tracking.zoom)} />
       <Metric label="Pinch" value={tracking.pinching ? "Active" : "Idle"} />
 
       <button
@@ -43,10 +42,4 @@ function getCameraButtonLabel(isRunning, isLoading) {
   }
 
   return "Start camera";
-}
-
-function formatPercent(value) {
-  const safeValue = Math.min(Math.max(value, 0), 1);
-
-  return `${Math.round(safeValue * 100)}%`;
 }

@@ -22,8 +22,8 @@ export const READY_STATUS = {
   hand: "No hand",
   confidence: 0,
   gesture: "None",
-  zoom: 0,
   pinching: false,
+  pointer: null,
 };
 
 export async function createHandLandmarker() {
