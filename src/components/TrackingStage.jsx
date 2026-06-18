@@ -115,7 +115,7 @@ export function TrackingStage({
       }
 
       // Get There-knap dwell
-      if (isInInfoBox) {
+      if (isInInfoBox && currentView !== "map") {
         const overButton = handPoint.y > 0.7;
 
         if (overButton && buttonDwellRef.current === null) {

@@ -225,11 +225,7 @@ span {
   display: block;
 }
 
-.map-art [id^="stage_"] {
-  transition: opacity 160ms ease, filter 160ms ease, transform 160ms ease;
-}
-
-.map-frame[data-hovered-stage="stand_food"] #stand_food,
+/* .map-frame[data-hovered-stage="stand_food"] #stand_food,
 .map-frame[data-hovered-stage="stage_orange"] #stage_orange,
 .map-frame[data-hovered-stage="stand_merch"] #stand_merch {
   opacity: 0.9;
@@ -250,7 +246,7 @@ span {
   transform: translateY(-2px);
   border-color: rgba(31, 187, 166, 0.48);
   background: rgba(15, 23, 20, 0.88);
-}
+} */
 
 .webcam-feed.is-hidden {
   opacity: 0;

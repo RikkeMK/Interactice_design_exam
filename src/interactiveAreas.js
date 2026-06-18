@@ -15,9 +15,9 @@ export const MAP_AREAS = [
 ];
 
 export const FESTIVAL_AREAS = [
-  { id: "stage_orange", x: 351, y: 164, width: 197.425, height: 150 },
-  { id: "stand_food", x: 137, y: 281, width: 140, height: 170 },
-  { id: "stand_merch", x: 790, y: 324, width: 140, height: 150 },
+  { id: "stage_orange", x: 370, y: 164, width: 197.425, height: 200 },
+  { id: "stand_food", x: 157, y: 201, width: 150, height: 260 },
+  { id: "stand_merch", x: 790, y: 324, width: 140, height: 230 },
 ];
 
 export function getAreaAtPoint(x, y, areas) {
