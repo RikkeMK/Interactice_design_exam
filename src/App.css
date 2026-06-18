@@ -302,17 +302,18 @@ span {
 }
 
 .infoBox {
-  background: var(--panel);
-  display: grid;
-  grid-template-rows: auto repeat(4, minmax(72px, auto)) 1fr;
-  gap: 10px;
-  min-width: 435px;
+  background: white;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  min-width: 435px;
   padding: 13px 20px 23px 20px;
 }
 
 .infoBoxStage {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .infoBoxTopBar {
@@ -362,6 +363,7 @@ span {
   font-size: 36px;
   font-weight: 900;
   text-transform: uppercase;
+  line-height: 40px;
 }
 
 .infoBoxText {
@@ -376,6 +378,97 @@ span {
 
 .infoBoxText p:last-child {
   text-decoration: underline;
+}
+
+.infoBoxButton {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.getThereButton {
+  background-color: #ff5500;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 62px;
+}
+
+.getThereButton[data-hovering="true"] {
+  background-color: #e85c1a;
+  transform: scale(1.03);
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.getThereButton h2 {
+  color: white;
+  text-transform: uppercase;
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.qrOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.qrBox {
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 653px;
+  max-height: 620px;
+  height: 100%;
+  width: 100%;
+}
+
+.qrTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #e85c1a;
+}
+
+.qrTitle span:last-child {
+  color: black;
+}
+
+.qrCountdown {
+  font-size: 48px;
+  font-weight: 900;
+  color: #e85c1a;
+  margin: 0;
+}
+
+.qrCloseButton {
+  background: #e85c1a;
+  border: none;
+  border-radius: 8px;
+}
+
+.qrCloseButton h2 {
+  color: white;
+  padding: 6px 62px;
+  text-transform: uppercase;
+}
+
+.qrCloseButton[data-hovering="true"] {
+  background: #c44e12;
+  transform: scale(1.03);
+  transition: background 200ms ease, transform 200ms ease;
 }
 
 .programList {
@@ -464,14 +557,6 @@ span {
   padding-left: 10px;
 }
 
-.metric {
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-}
-
 .metric span {
   color: var(--muted);
   font-size: 0.82rem;
@@ -482,12 +567,6 @@ span {
 .metric strong {
   color: var(--text-strong);
   font-size: 1.18rem;
-}
-
-.camera-button {
-  align-self: end;
-  width: 100%;
-  padding: 0 16px;
 }
 
 @media (max-width: 880px) {

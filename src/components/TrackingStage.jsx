@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { VIDEO_CONSTRAINTS } from "../handTracking";
 import {
   MAP_VIEWBOX,
@@ -30,9 +30,49 @@ export function TrackingStage({
 }) {
   const handPoint = tracking?.pointer;
   const [lockedStage, setLockedStage] = useState(null);
+  const [showQR, setShowQR] = useState(false);
+  const [hoveringClose, setHoveringClose] = useState(false);
+  const [hoveringButton, setHoveringButton] = useState(false);
+  const [qrCountdown, setQrCountdown] = useState(10);
 
   const dwellTimerRef = useRef(null);
   const dwellTargetRef = useRef(null);
+  const buttonDwellRef = useRef(null);
+  const closeDwellRef = useRef(null);
+
+  useEffect(() => {
+    if (!handPoint || showQR) {
+      setHoveringButton(false);
+      return;
+    }
+    setHoveringButton(handPoint.x > LEFT_RATIO && handPoint.y > 0.7);
+  }, [handPoint, showQR]);
+
+  useEffect(() => {
+    if (!showQR || !handPoint) {
+      setHoveringClose(false);
+      return;
+    }
+    const overCloseButton =
+      handPoint.x > 0.35 &&
+      handPoint.x < 0.65 &&
+      handPoint.y > 0.8 &&
+      handPoint.y < 0.9;
+    setHoveringClose(overCloseButton);
+  }, [handPoint, showQR]);
+
+  useEffect(() => {
+    if (!showQR) {
+      setQrCountdown(10);
+      return;
+    }
+    if (qrCountdown <= 0) {
+      setShowQR(false);
+      return;
+    }
+    const timer = setTimeout(() => setQrCountdown((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [showQR, qrCountdown]);
 
   useLayoutEffect(() => {
     const frameId = requestAnimationFrame(() => {
@@ -43,6 +83,8 @@ export function TrackingStage({
         return;
       }
 
+      const isInInfoBox = handPoint.x > LEFT_RATIO;
+
       const viewbox = currentView === "map" ? MAP_VIEWBOX : FESTIVAL_VIEWBOX;
       const areas = currentView === "map" ? MAP_AREAS : FESTIVAL_AREAS;
 
@@ -52,16 +94,51 @@ export function TrackingStage({
 
       onHoverStageChange?.(nextHoveredArea);
 
-      const isInInfoBox = handPoint.x > LEFT_RATIO;
+      // QR overlay close-knap dwell
+      if (showQR) {
+        const overCloseButton =
+          handPoint.x > 0.35 &&
+          handPoint.x < 0.65 &&
+          handPoint.y > 0.8 &&
+          handPoint.y < 0.9;
 
+        if (overCloseButton && closeDwellRef.current === null) {
+          closeDwellRef.current = setTimeout(() => {
+            setShowQR(false);
+            closeDwellRef.current = null;
+          }, 1500);
+        } else if (!overCloseButton && closeDwellRef.current !== null) {
+          clearTimeout(closeDwellRef.current);
+          closeDwellRef.current = null;
+        }
+        return;
+      }
+
+      // Get There-knap dwell
+      if (isInInfoBox) {
+        const overButton = handPoint.y > 0.7;
+
+        if (overButton && buttonDwellRef.current === null) {
+          buttonDwellRef.current = setTimeout(() => {
+            setShowQR(true);
+            buttonDwellRef.current = null;
+          }, 1500);
+        } else if (!overButton && buttonDwellRef.current !== null) {
+          clearTimeout(buttonDwellRef.current);
+          buttonDwellRef.current = null;
+        }
+      }
+
+      // Lock logik
       if (tracking.gesture === "Closed hand") {
         if (nextHoveredArea) {
           setLockedStage(nextHoveredArea);
         } else if (!isInInfoBox) {
-          setLockedStage(null); // ryd kun lock hvis hånden er udenfor InfoBox
+          setLockedStage(null);
         }
       }
 
+      // Kort-navigation dwell
       if (
         currentView === "map" &&
         nextHoveredArea &&
@@ -85,6 +162,7 @@ export function TrackingStage({
     isRunning,
     onHoverStageChange,
     onNavigate,
+    showQR,
     tracking?.mode,
     tracking?.gesture,
   ]);
@@ -113,7 +191,6 @@ export function TrackingStage({
                   <FestivalSite hoveredStage={hoveredStage} />
                 )}
               </div>
-
               {!isRunning && (
                 <div className="start-overlay">
                   <button
@@ -137,6 +214,11 @@ export function TrackingStage({
             isRunning={isRunning}
             onStartCamera={onStartCamera}
             onStopCamera={onStopCamera}
+            showQR={showQR}
+            onCloseQR={() => setShowQR(false)}
+            hoveringClose={hoveringClose}
+            hoveringButton={hoveringButton}
+            qrCountdown={qrCountdown}
           />
         </div>
         <canvas ref={canvasRef} className="landmark-layer" aria-hidden="true" />
