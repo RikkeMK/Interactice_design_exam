@@ -10,7 +10,7 @@ const TestBox = forwardRef(function TestBox(
       className={`testBox ${className}`.trim()}
       data-hovered={isHovered ? "true" : "false"}
     >
-      <h1>{area?.name}</h1>
+      <h2>{area?.name}</h2>
     </div>
   );
 });
