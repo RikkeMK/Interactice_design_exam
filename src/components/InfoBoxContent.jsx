@@ -53,16 +53,18 @@ function LineupList({ items }) {
 
 function StandList({ items }) {
   return (
-    <ul className="standList">
-      {items.map((item) => (
-        <li key={item.name}>
-          <img src={item.image} alt={item.name} />
-          <div className="standListInfo">
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="standList">
+        {items.map((item) => (
+          <li key={item.name}>
+            <img src={item.image} alt={item.name} />
+            <div className="standListInfo">
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

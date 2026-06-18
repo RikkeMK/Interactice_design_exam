@@ -21,6 +21,7 @@ export const infoData = {
         image: "/src/assets/tobiasRahim.png",
       },
     ],
+    url: "https://maps.apple.com/directions?source=56.119379%2C10.158382&destination=Roskilde+Drive+In+Bio%2C+Darupvej+21%2C+4000+Roskilde%2C+Danmark&destination-place-id=I8BB31B488B3AEB7D&mode=walking",
   },
   stand_food: {
     type: "stand",
@@ -45,6 +46,7 @@ export const infoData = {
         image: "/src/assets/kopan.png",
       },
     ],
+    url: "https://maps.apple.com/directions?source=56.119379%2C10.158382&destination=Roskilde+Festival+Food+Court%2C+Darupvej+19+4000+Roskilde+Danmark&destination-place-id=I489DB94BA54F4440&mode=walking",
   },
   stand_merch: {
     type: "stand",
@@ -64,6 +66,7 @@ export const infoData = {
       },
       { name: "Cap", description: "One size", image: "/src/assets/cap.png" },
     ],
+    url: "https://maps.apple.com/directions?source=56.119379%2C10.158382&destination=Roskilde+Festival+Merch+Shop%2C+Darupvej+19+4000+Roskilde+Danmark&destination-place-id=I5BA76FD58C24B158&mode=walking",
   },
 
   festival_site: {
