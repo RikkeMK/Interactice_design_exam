@@ -1,13 +1,13 @@
-import malkDeKoijn from "./src/assets/malkDeKoijn.png";
-import littleSimz from "./src/assets/littleSimz.png";
-import gorillaz from "./src/assets/gorillaz.png";
-import tobiasRahim from "./src/assets/tobiasRahim.png";
-import mikuna from "./src/assets/mikuna.png";
-import newArctic from "./src/assets/newArctic.png";
-import kopan from "./src/assets/kopan.png";
-import shirt from "./src/assets/shirt.png";
-import hoodie from "./src/assets/hoodie.png";
-import cap from "./src/assets/cap.png";
+import malkDeKoijn from "./public/assets/malkDeKoijn.png";
+import littleSimz from "./public/assets/littleSimz.png";
+import gorillaz from "./public/assets/gorillaz.png";
+import tobiasRahim from "./public/assets/tobiasRahim.png";
+import mikuna from "./public/assets/mikuna.png";
+import newArctic from "./public/assets/newArctic.png";
+import kopan from "./public/assets/kopan.png";
+import shirt from "./public/assets/shirt.png";
+import hoodie from "./public/assets/hoodie.png";
+import cap from "./public/assets/cap.png";
 
 export const infoData = {
   stage_orange: {
