@@ -38,7 +38,7 @@ export default function BottomBar({ currentView }) {
 
         <div className="handInstruction">
           <ClosedHandIcon />
-          <strong>Make a fist to click and open</strong>
+          <strong>Close + open hand to lock and unlock</strong>
         </div>
       </div>
     </div>
