@@ -127,6 +127,9 @@ export function TrackingStage({
           clearTimeout(buttonDwellRef.current);
           buttonDwellRef.current = null;
         }
+      } else {
+        clearTimeout(buttonDwellRef.current);
+        buttonDwellRef.current = null;
       }
 
       // Lock logik
