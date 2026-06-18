@@ -29,7 +29,21 @@
 }
 
 html {
-  min-width: 1500px;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 1500px;
+  height: 900px;
+  transform-origin: top left;
+  transform: scale(var(--app-scale, 1));
 }
 
 .app-shell {

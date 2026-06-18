@@ -6,6 +6,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>roskilde_exam</title>
   </head>
+  <script>
+    function scaleApp() {
+      const scaleX = window.innerWidth / 1500;
+      const scaleY = window.innerHeight / 900;
+      const scale = Math.min(scaleX, scaleY);
+      document.getElementById("root").style.setProperty("--app-scale", scale);
+      document.getElementById("root").style.marginLeft =
+        (window.innerWidth - 1500 * scale) / 2 + "px";
+      document.getElementById("root").style.marginTop =
+        (window.innerHeight - 900 * scale) / 2 + "px";
+    }
+    scaleApp();
+    window.addEventListener("resize", scaleApp);
+  </script>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
