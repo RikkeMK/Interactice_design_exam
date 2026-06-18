@@ -57,23 +57,48 @@ export function clearCanvas(canvas) {
 
 export function drawHand(canvas, landmarks) {
   const context = canvas.getContext("2d");
-
-  if (!context) {
-    return;
-  }
+  if (!context) return;
 
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  const drawing = new DrawingUtils(context);
-  drawing.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
-    color: "rgba(41, 210, 178, 0.92)",
-    lineWidth: 5,
-  });
-  drawing.drawLandmarks(landmarks, {
-    fillColor: getLandmarkColor,
-    lineWidth: 1,
-    radius: ({ index }) => (index === 4 || index === 8 ? 9 : 6),
-  });
+  const tip = landmarks[8];
+  const x = tip.x * canvas.width;
+  const y = tip.y * canvas.height;
+  const radius = 18;
+
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.fillStyle = "rgba(255, 85, 0, 0.8)";
+  context.fill();
+
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.strokeStyle = "rgba(255, 255, 255, 0.9)";
+  context.lineWidth = 3;
+  context.stroke();
+
+  // lille prik i midten
+  context.beginPath();
+  context.arc(x, y, 4, 0, Math.PI * 2);
+  context.fillStyle = "white";
+  context.fill();
+
+  // if (!context) {
+  //   return;
+  // }
+
+  // context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // const drawing = new DrawingUtils(context);
+  // drawing.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
+  //   color: "rgba(41, 210, 178, 0.92)",
+  //   lineWidth: 5,
+  // });
+  // drawing.drawLandmarks(landmarks, {
+  //   fillColor: getLandmarkColor,
+  //   lineWidth: 1,
+  //   radius: ({ index }) => (index === 4 || index === 8 ? 9 : 6),
+  // });
 }
 
 function createLandmarker(vision, delegate) {
